@@ -1,0 +1,381 @@
+/* ==================================================================
+   CUSTOMIZE HERE
+   Change colors, fonts, and sizes in this block. Everything else
+   in the file reads from these variables.
+   ================================================================== */
+:root {
+  /* Fonts */
+  --font-body: "AR PL UKai CN", "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-heading: "Manrope", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Colors (light) */
+  --bg: #ffffff;
+  --sidebar-bg: #f6f7f8;
+  --ink: #1c1e22;
+  --muted: #6a6f78;
+  --line: #e2e4e8;
+  --accent: #2b4fb3;
+
+  /* Layout */
+  --sidebar-w: 300px;
+  --content-w: 700px;
+  --headshot-size: 120px;
+  --headshot-radius: 50%;   /* 50% = circle, 8px = rounded square, 0 = square */
+
+  /* Motion */
+  --fade-time: 0.9s;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121316;
+    --sidebar-bg: #17181c;
+    --ink: #e8e9ec;
+    --muted: #9296a0;
+    --line: #2a2c32;
+    --accent: #8aa4ff;
+  }
+}
+
+/* To make "AR PL UKai CN" show for every visitor (not just people who have it
+   installed), download the font file, put it in an /assets/fonts folder,
+   check its license, then uncomment this block:
+
+@font-face {
+  font-family: "AR PL UKai CN";
+  src: url("assets/fonts/ukai.ttc") format("truetype");
+  font-display: swap;
+}
+*/
+
+/* ==================================================================
+   BASE
+   ================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+p { margin: 0 0 1.1em; }
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s, color 0.2s;
+}
+a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==================================================================
+   SIDEBAR
+   ================================================================== */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-w);
+  padding: 56px 36px 36px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.headshot {
+  display: block;
+  width: var(--headshot-size);
+  height: var(--headshot-size);
+  object-fit: cover;
+  border-radius: var(--headshot-radius);
+  margin-bottom: 24px;
+}
+
+.name {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 44px;
+}
+
+.nav a {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px 0 4px 14px;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav a:hover { color: var(--ink); }
+.nav a.active {
+  color: var(--ink);
+  border-left-color: var(--accent);
+}
+
+.social {
+  margin-top: auto;
+  padding-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 0.85rem;
+}
+.social a { color: var(--muted); }
+.social a:hover { color: var(--accent); }
+
+/* ==================================================================
+   MAIN CONTENT
+   ================================================================== */
+.main {
+  margin-left: var(--sidebar-w);
+  padding: 0 64px;
+}
+
+.main > section {
+  max-width: var(--content-w);
+  padding: 96px 0 40px;
+}
+.main > section:first-child { padding-top: 120px; }
+
+.hero {
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  max-width: 24em;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 36px;
+}
+
+/* Projects */
+.project {
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+}
+.project:last-child { border-bottom: 1px solid var(--line); }
+
+.project h3 {
+  font-size: 1.15rem;
+  margin-bottom: 14px;
+}
+
+dl { margin: 0; }
+
+.project dl {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 8px 20px;
+}
+.project dt,
+.skills dt {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.project dd,
+.skills dd { margin: 0; }
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 18px 0 0;
+  font-size: 0.9rem;
+}
+
+/* Experience */
+.entry {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 4px 20px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.entry:last-of-type { border-bottom: 1px solid var(--line); }
+.entry-when {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 3px 0 0;
+}
+.entry h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+.entry p:last-child { margin-bottom: 0; }
+
+/* Skills */
+.skills {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 10px 20px;
+}
+
+.footer {
+  max-width: var(--content-w);
+  padding: 72px 0 48px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ==================================================================
+   BANNER
+   ================================================================== */
+.banner {
+  position: relative;
+  height: 280px;
+  margin: 0 -64px;            /* stretches past the main padding to the edges */
+  background: var(--line);    /* shows if the image is missing */
+  overflow: hidden;
+}
+
+.banner > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* crops instead of stretching */
+  object-position: center;    /* try "center top" or "center 30%" to shift the crop */
+}
+
+/* Dark gradient at the bottom so the tagline stays readable on any photo */
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
+.banner-content {
+  position: absolute;
+  left: 64px;
+  bottom: 32px;
+  z-index: 1;                 /* keeps it above the gradient */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;                /* the icon uses currentColor, so this colors it too */
+}
+
+.banner-icon {
+  flex: none;                 /* stops the icon from shrinking */
+  width: 30px;
+  height: 30px;
+}
+
+.banner-tagline {
+  margin: 0;
+  max-width: 28em;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* The first section after the banner doesn't need as much top space */
+.banner + section { padding-top: 64px; }
+
+/* ==================================================================
+   FADE-IN (titles)
+   Add class="fade" to any element. Headings are hidden only when
+   JavaScript is running, so the page still works without it.
+   ================================================================== */
+.js .fade {
+  opacity: 0;
+  transition: opacity var(--fade-time) ease;
+}
+.js .fade.visible { opacity: 1; }
+
+/* The opening headline gets a slightly slower fade */
+.js .hero.fade { transition-duration: 1.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .fade { opacity: 1; transition: none; }
+}
+
+/* ==================================================================
+   MOBILE: sidebar becomes a header at the top
+   ================================================================== */
+@media (max-width: 860px) {
+
+    .banner { height: 200px; margin: 0 -24px; }
+  .banner-content { left: 24px; bottom: 20px; gap: 12px; }
+  .banner-icon { width: 20px; height: 20px; }
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding: 36px 24px 24px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .profile {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    align-items: center;
+  }
+  .headshot { --headshot-size: 88px; grid-row: span 2; margin: 0; }
+  .name { font-size: 1.35rem; margin-bottom: 4px; align-self: end; }
+  .tagline { align-self: start; }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-top: 24px;
+  }
+  .nav a { padding: 4px 0; border-left: 0; border-bottom: 2px solid transparent; }
+  .nav a.active { border-bottom-color: var(--accent); }
+
+  .social { padding-top: 20px; margin-top: 0; }
+
+  .main { margin-left: 0; padding: 0 24px; }
+  .main > section { padding-top: 64px; }
+  .main > section:first-child { padding-top: 56px; }
+
+  .project dl,
+  .skills,
+  .entry { grid-template-columns: 1fr; gap: 2px; }
+  .project dd, .skills dd { margin-bottom: 8px; }
+}
